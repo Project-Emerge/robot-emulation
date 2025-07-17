@@ -209,6 +209,6 @@ class RobotWorld:
             neighbors = self._get_neighbors(robot)
             neighbor_count = len(neighbors)
             print(f"Robot {robot.id}: "
-                  f"Pos({status["x"]:.2f}, {status["y"]:.2f}) "
-                  f"Angle: {status["orientation"]:.1f}° "
+                  f"Pos({status['x']:.2f}, {status['y']:.2f}) "
+                  f"Angle: {status['orientation']:.1f}° "
                   f"Neighbors: {neighbor_count}")
