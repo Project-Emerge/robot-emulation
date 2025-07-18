@@ -10,7 +10,7 @@ from core.robot import Position
 import paho.mqtt.client as mqtt
 
 class RobotWorld:
-    def __init__(self, num_robots: int, mqtt_url: str, world_size: float = 10.0, neighborhood_range: float = 10.0):
+    def __init__(self, num_robots: int, mqtt_url: str, world_size: float = 10.0, neighborhood_range: float = 20.0):
         self.world_size = world_size
         self.neighborhood_range = neighborhood_range
         self.robots: List[Robot] = []
@@ -43,7 +43,7 @@ class RobotWorld:
             y = spacing * (row + 1)
             
             # Random initial orientation
-            orientation = random.uniform(0, 2 * math.pi)
+            orientation = (random.uniform(0, 2 * math.pi) - math.pi)
             
             initial_pos = Position(x, y, orientation)
             robot = Robot(i, initial_pos, self.world_size)
@@ -165,7 +165,7 @@ class RobotWorld:
                 self._publish_robot_status(robot)
             
             # Sleep for approximately 1 second
-            time.sleep(0.03)
+            time.sleep(0.01)
     
     def start(self):
         """Start the robot simulation"""

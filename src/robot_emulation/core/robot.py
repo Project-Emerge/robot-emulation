@@ -73,24 +73,11 @@ class Robot:
                 velocity = (v_left + v_right) / 2
                 self.position.x += velocity * math.cos(self.position.orientation) * dt
                 self.position.y += velocity * math.sin(self.position.orientation) * dt
-        
-        # Keep orientation in [0, 2π]
-        self.position.orientation = self.position.orientation % (2 * math.pi)
-        
-        # Boundary checking - bounce off walls
-        if self.position.x < 0:
-            self.position.x = 0
-            self.position.orientation = math.pi - self.position.orientation
-        elif self.position.x > self.world_size:
-            self.position.x = self.world_size
-            self.position.orientation = math.pi - self.position.orientation
-            
-        if self.position.y < 0:
-            self.position.y = 0
-            self.position.orientation = -self.position.orientation
-        elif self.position.y > self.world_size:
-            self.position.y = self.world_size
-            self.position.orientation = -self.position.orientation
+
+        # Keep orientation in [-π, π]
+        self.position.orientation = (self.position.orientation + math.pi) % (2 * math.pi) - math.pi
+
+
     
     def get_status(self) -> Dict:
         """Get robot status for MQTT publishing"""
@@ -98,5 +85,5 @@ class Robot:
             "robot_id": self.id,
             "x": round(self.position.x, 3),
             "y": round(self.position.y, 3),
-            "orientation": round(math.degrees(self.position.orientation), 1)
+            "orientation": self.position.orientation
         }
