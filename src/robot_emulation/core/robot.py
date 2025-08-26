@@ -20,8 +20,8 @@ class Robot:
         self.position = initial_position
         self.world_size = world_size
         self.wheel_radius = 0.05  # 5cm wheel radius
-        self.wheel_base = 0.2     # 20cm distance between wheels
-        self.max_speed = 1.0      # max 1 m/s
+        self.wheel_base = 0.1     # 20cm distance between wheels
+        self.max_speed = 0.3      # max 1 m/s
         self.left_motor_power = 0.0   # -1 to 1
         self.right_motor_power = 0.0  # -1 to 1
         self.running = False
@@ -54,25 +54,32 @@ class Robot:
         # Calculate wheel velocities from motor power (-1 to 1)
         v_left = self.left_motor_power * self.max_speed
         v_right = self.right_motor_power * self.max_speed
-        
+
+        fx = math.cos(self.position.orientation)
+        fy = math.sin(self.position.orientation)
+
         # Differential drive kinematics
         if abs(v_left - v_right) < 0.001:  # Moving straight
             velocity = (v_left + v_right) / 2
-            self.position.x += velocity * math.cos(self.position.orientation) * dt
-            self.position.y += velocity * math.sin(self.position.orientation) * dt
+            self.position.x += velocity * fx * dt
+            self.position.y += velocity * fy * dt
         else:  # Turning
             # Calculate instantaneous center of curvature
             if abs(v_right - v_left) > 0.001:  # Avoid division by zero
                 R = self.wheel_base * (v_left + v_right) / (2 * (v_right - v_left))
                 omega = (v_right - v_left) / self.wheel_base
-                
+
                 # Update orientation
                 self.position.orientation += omega * dt
-                
+
+                # Update forward vector after orientation change
+                fx = math.cos(self.position.orientation)
+                fy =  math.sin(self.position.orientation)
+
                 # Update position
                 velocity = (v_left + v_right) / 2
-                self.position.x += velocity * math.cos(self.position.orientation) * dt
-                self.position.y += velocity * math.sin(self.position.orientation) * dt
+                self.position.x += velocity * fx * dt
+                self.position.y += velocity * fy * dt
 
         # Keep orientation in [-π, π]
         self.position.orientation = (self.position.orientation + math.pi) % (2 * math.pi) - math.pi

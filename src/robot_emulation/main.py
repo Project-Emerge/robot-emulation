@@ -16,6 +16,8 @@ def parse_arguments():
                         help='MQTT broker URL (e.g., mqtt://localhost:1883 or localhost:1883)')
     parser.add_argument('--world-size', '-w', type=float, default=10.0,
                         help='World size in meters (default: 10.0)')
+    parser.add_argument('--neighborhood-range', '-n', type=float, default=20.0,
+                        help='Neighborhood range in meters (default: 20.0)')
     
     return parser.parse_args()
 
@@ -27,9 +29,10 @@ def main():
     print(f"Robots: {args.robots}")
     print(f"MQTT URL: {args.mqtt}")
     print(f"World Size: {args.world_size}m x {args.world_size}m")
+    print(f"Neighborhood Range: {args.neighborhood_range}m")
     
     # Create world
-    world = RobotWorld(num_robots=args.robots, mqtt_url=args.mqtt, world_size=args.world_size)
+    world = RobotWorld(num_robots=args.robots, mqtt_url=args.mqtt, world_size=args.world_size, neighborhood_range=args.neighborhood_range)
     
     # Start simulation
     world.start()
