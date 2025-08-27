@@ -145,10 +145,10 @@ class RobotWorld:
             self.mqtt_client.publish(position_topic, position_message)
             
             # Publish neighbors information
-            neighbors_topic = f"robots/{robot.id}/neighbors"
-            neighbors = self._get_neighbors(robot)
-            neighbors_message = json.dumps(neighbors)
-            self.mqtt_client.publish(neighbors_topic, neighbors_message)
+            # neighbors_topic = f"robots/{robot.id}/neighbors"
+            # neighbors = self._get_neighbors(robot)
+            # neighbors_message = json.dumps(neighbors)
+            # self.mqtt_client.publish(neighbors_topic, neighbors_message)
     
     def _update_loop(self):
         """Main update loop for the simulation"""
