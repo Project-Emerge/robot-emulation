@@ -55,10 +55,8 @@ class Robot:
         v_left = self.left_motor_power * self.max_speed
         v_right = self.right_motor_power * self.max_speed
 
-        fx = math.cos(self.position.orientation)
-        fy = math.sin(self.position.orientation)
-
-        # Differential drive kinematics
+        fx = - math.sin(self.position.orientation)
+        fy = math.cos(self.position.orientation)
         if abs(v_left - v_right) < 0.001:  # Moving straight
             velocity = (v_left + v_right) / 2
             self.position.x += velocity * fx * dt
@@ -73,17 +71,17 @@ class Robot:
                 self.position.orientation += omega * dt
 
                 # Update forward vector after orientation change
-                fx = math.cos(self.position.orientation)
-                fy =  math.sin(self.position.orientation)
+                fx = - math.sin(self.position.orientation)
+                fy = math.cos(self.position.orientation)
 
                 # Update position
                 velocity = (v_left + v_right) / 2
                 self.position.x += velocity * fx * dt
                 self.position.y += velocity * fy * dt
+        
 
         # Keep orientation in [-π, π]
-        self.position.orientation = (self.position.orientation + math.pi) % (2 * math.pi) - math.pi
-
+        self.position.orientation = (self.position.orientation + math.pi) % (2 * math.pi) - math.pi 
 
     
     def get_status(self) -> Dict:
