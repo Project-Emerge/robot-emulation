@@ -10,18 +10,18 @@ from core.robot import Position
 import paho.mqtt.client as mqtt
 
 class RobotWorld:
-    def __init__(self, num_robots: int, mqtt_url: str, world_size: float = 10.0, neighborhood_range: float = 20.0):
+    def __init__(self, num_robots: int, mqtt_url: str, world_size: float = 10.0, neighborhood_range: float = 20.0, send_neighbors: bool = False):
         self.world_size = world_size
         self.neighborhood_range = neighborhood_range
+        self.send_neighbors = send_neighbors
         self.robots: List[Robot] = []
         self.running = False
         self.update_thread = None
         self.mqtt_client = None
         self.mqtt_url = mqtt_url
-        
+        self.send_neighbors = send_neighbors
         # Initialize robots in a square formation
         self._initialize_robots(num_robots)
-        
         # Setup MQTT
         self._setup_mqtt()
     
@@ -144,11 +144,12 @@ class RobotWorld:
             position_message = json.dumps(robot.get_status())
             self.mqtt_client.publish(position_topic, position_message)
             
-            # Publish neighbors information
-            # neighbors_topic = f"robots/{robot.id}/neighbors"
-            # neighbors = self._get_neighbors(robot)
-            # neighbors_message = json.dumps(neighbors)
-            # self.mqtt_client.publish(neighbors_topic, neighbors_message)
+            # Publish neighbors information only if enabled
+            if self.send_neighbors:
+                neighbors_topic = f"robots/{robot.id}/neighbors"
+                neighbors = self._get_neighbors(robot)
+                neighbors_message = json.dumps(neighbors)
+                self.mqtt_client.publish(neighbors_topic, neighbors_message)
     
     def _update_loop(self):
         """Main update loop for the simulation"""

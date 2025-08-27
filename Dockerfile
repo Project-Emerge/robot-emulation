@@ -29,7 +29,8 @@ ENV PYTHONPATH="/app/src" \
     ROBOTS=100 \
     MQTT="mqtt://localhost:1883" \
     WORLD_SIZE=100.0 \
-    NEIGHBORHOOD_RANGE=20.0
+    NEIGHBORHOOD_RANGE=20.0 \
+    SEND_NEIGHBORS=False
 
 # Default command uses python and environment variables
-CMD ["sh", "-c", "python src/robot_emulation/main.py --robots $ROBOTS --mqtt $MQTT --world-size $WORLD_SIZE --neighborhood-range $NEIGHBORHOOD_RANGE"]
+CMD ["sh", "-c", "python src/robot_emulation/main.py --robots $ROBOTS --mqtt $MQTT --world-size $WORLD_SIZE --neighborhood-range $NEIGHBORHOOD_RANGE --send-neighbors $SEND_NEIGHBORS"]
