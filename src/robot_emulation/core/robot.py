@@ -64,8 +64,7 @@ class Robot:
         else:  # Turning
             # Calculate instantaneous center of curvature
             if abs(v_right - v_left) > 0.001:  # Avoid division by zero
-                R = self.wheel_base * (v_left + v_right) / (2 * (v_right - v_left))
-                omega = (v_right - v_left) / self.wheel_base
+                omega = (v_left - v_right) / self.wheel_base
 
                 # Update orientation
                 self.position.orientation += omega * dt

@@ -167,7 +167,7 @@ class RobotWorld:
                 self._publish_robot_status(robot)
             
             # Sleep for approximately 1 second
-            time.sleep(0.16)
+            time.sleep(0.016)
     
     def start(self):
         """Start the robot simulation"""
