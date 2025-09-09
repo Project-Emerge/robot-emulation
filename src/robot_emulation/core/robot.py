@@ -31,8 +31,9 @@ class Robot:
         print(command)
         try:
             if isinstance(command, dict):
-                self.left_motor_power = max(-1.0, min(1.0, float(command.get('left', 0))))
-                self.right_motor_power = max(-1.0, min(1.0, float(command.get('right', 0))))
+                ## Right left are mirrored.
+                self.left_motor_power = max(-1.0, min(1.0, float(command.get('right', 0))))
+                self.right_motor_power = max(-1.0, min(1.0, float(command.get('left', 0))))
             else:
                 # Fallback for string commands for backward compatibility
                 if command == 'l':
