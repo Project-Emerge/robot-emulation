@@ -105,7 +105,7 @@ class RobotWorld:
             print("Connected to MQTT broker")
             # Subscribe to command topics for all robots
             for robot in self.robots:
-                topic = f"robots/{robot.id}/move"
+                topic = f"robot/{robot.id}/move"
                 client.subscribe(topic)
                 print(f"Subscribed to {topic}")
         else:
@@ -117,9 +117,8 @@ class RobotWorld:
             # Extract robot ID from topic
             topic_parts = msg.topic.split('/')
             print(f"Received MQTT message on topic: {msg.topic}")
-            if len(topic_parts) >= 3 and topic_parts[0] == "robots":
+            if len(topic_parts) >= 3 and topic_parts[0] == "robot":
                 robot_id = int(topic_parts[1])
-                
                 # Parse command - expecting JSON format
                 try:
                     command = json.loads(msg.payload.decode('utf-8'))
@@ -140,14 +139,14 @@ class RobotWorld:
         """Publish robot status to MQTT"""
         if self.mqtt_client:
             # Publish position
-            position_topic = f"robots/{robot.id}/position"
+            position_topic = f"robot/{robot.id}/position"
             position_message = json.dumps(robot.get_status())
             self.mqtt_client.publish(position_topic, position_message)
             
             # Publish neighbors information only if enabled
             # TODO For some reason this is not working as intended, removing it now 
             # if self.send_neighbors:
-            #     neighbors_topic = f"robots/{robot.id}/neighbors"
+            #     neighbors_topic = f"robot/{robot.id}/neighbors"
             #     neighbors = self._get_neighbors(robot)
             #     neighbors_message = json.dumps(neighbors)
             #     self.mqtt_client.publish(neighbors_topic, neighbors_message)

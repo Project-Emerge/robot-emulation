@@ -28,6 +28,7 @@ class Robot:
         
     def process_command(self, command: Dict):
         """Process movement commands with left/right motor values from -1 to 1"""
+        print(command)
         try:
             if isinstance(command, dict):
                 self.left_motor_power = max(-1.0, min(1.0, float(command.get('left', 0))))
