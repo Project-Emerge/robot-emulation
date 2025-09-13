@@ -21,7 +21,7 @@ class Robot:
         self.world_size = world_size
         self.wheel_radius = 0.05  # 5cm wheel radius
         self.wheel_base = 0.1     # 20cm distance between wheels
-        self.max_speed = 0.3      # max 1 m/s
+        self.max_speed = 0.1      # max 1 m/s
         self.left_motor_power = 0.0   # -1 to 1
         self.right_motor_power = 0.0  # -1 to 1
         self.running = False
@@ -91,5 +91,5 @@ class Robot:
             "robot_id": self.id,
             "x": round(self.position.x, 3),
             "y": round(self.position.y, 3),
-            "orientation": self.position.orientation
+            "orientation": self.position.orientation 
         }

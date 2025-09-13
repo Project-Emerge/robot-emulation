@@ -41,7 +41,7 @@ def main():
     try:
         print("\nSimulation started. Robot status will be published every second.")
         print("Send motor commands to robots via MQTT:")
-        print("Topic: robot/{robot_id}/command")
+        print("Topic: robots/{robot_id}/command")
         print("Message format: {\"left\": -1.0, \"right\": 1.0}")
         print("  - left/right values: -1.0 (full backward) to 1.0 (full forward)")
         print("  - 0.0 = stop")
