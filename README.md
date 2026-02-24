@@ -9,4 +9,4 @@ They continuously send data about their state via MQTT, which can be visualized 
 
 
 ## How to visualize the data
-You should use the other repository [robot_emulation_web](https://github.com/Project-Emerge/robot-visualization-dashboard)
+You should use the other repository [robot_emulation_web](https://github.com/Project-Emerge/Project-Emerge-system)
