@@ -117,7 +117,8 @@ To select a leader:
 
 See this video for a demonstration of the expected behavior:
 
-![Video Demonstration](./static/point-to-leader.webm)(./static/point-to-leader.webm)
+<img width="1914" height="963" alt="point-to-leader" src="https://github.com/user-attachments/assets/fe3a75e2-635e-468a-9115-57fca26cb035" />
+
 
 After selecting a leader, the other robots should start orienting themselves toward it.
 
@@ -136,7 +137,10 @@ Available formations may include:
 Select a formation from the dropdown menu to change the behavior of the robot swarm.
 
 See this video for a demonstration of changing the formation:
-![Video Demonstration](./static/change-formation.webm)(./static/change-formation.webm)
+
+<img width="957" height="482" alt="smaller" src="https://github.com/user-attachments/assets/93f2c4f1-9164-4eba-bbe9-f202ee6bb18f" />
+
+
 ---
 
 ## Useful Commands
