@@ -102,7 +102,7 @@ http://localhost:5173/
 ```
 
 This is what you should see
-![Dashboard Screenshot](./assets/localhost.png)
+![Dashboard Screenshot](./static/localhost.png)
 
 By default, the selected scenario is `Point to Leader`, where all robots orient themselves toward a selected leader robot.
 
