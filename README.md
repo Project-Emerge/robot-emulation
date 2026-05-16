@@ -3,6 +3,7 @@
 This repository setup is used to launch the Project Emerge experiment environment, including the system services, dashboard, and robot emulation.
 
 The default scenario is **Point to Leader**, where all robots orient themselves toward a selected leader robot.
+But you can change the formation scenario from the dashboard to see different behaviors---see the [Using the Dashboard](#3-using-the-dashboard) section for details.
 
 ---
 
@@ -100,13 +101,11 @@ Open the dashboard at:
 http://localhost:5173/
 ```
 
-By default, the selected scenario is:
+This is what you should see
+![Dashboard Screenshot](./assets/localhost.png)
 
-```text
-Point to Leader
-```
+By default, the selected scenario is `Point to Leader`, where all robots orient themselves toward a selected leader robot.
 
-In this scenario, all robots point toward the leader robot.
 
 Since no leader is selected by default, the robots should keep rotating indefinitely.
 
@@ -115,6 +114,10 @@ To select a leader:
 1. Click on a robot in the dashboard.
 2. Open the contextual menu.
 3. Select **Make Leader**.
+
+See this video for a demonstration of the expected behavior:
+
+![Video Demonstration](./static/point-to-leader.webm)(./static/point-to-leader.webm)
 
 After selecting a leader, the other robots should start orienting themselves toward it.
 
@@ -132,6 +135,8 @@ Available formations may include:
 
 Select a formation from the dropdown menu to change the behavior of the robot swarm.
 
+See this video for a demonstration of changing the formation:
+![Video Demonstration](./static/change-formation.webm)(./static/change-formation.webm)
 ---
 
 ## Useful Commands
